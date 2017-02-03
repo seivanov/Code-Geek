@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use common\models\ClientsSearch;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -22,13 +23,8 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['index'],
                         'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index'],
-                        'allow' => true,
-                        'roles' => ['@'],
                     ],
                 ],
             ],
@@ -60,7 +56,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+        $searchModel  = new ClientsSearch();
+        $dataProvider = $searchModel->search($_GET);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+        ]);
     }
 
     /**

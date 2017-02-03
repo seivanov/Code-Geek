@@ -26,6 +26,7 @@ return [
                 ],
             ],
         ],
+        'db' => require(__DIR__ . '/../../common/config/db.php'),
     ],
     'params' => $params,
 ];
