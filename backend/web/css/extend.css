@@ -5,6 +5,8 @@
 .grid-view tr[clienttype='2'] td:first-child { color:#9b9b9b }
 */
 
+.table th { color:#717171; font-size:13px; }
+
 .grid-view .fio { margin-left:20px;  }
 .grid-view tr[clienttype='0'] .fio::before {
     content: '';
@@ -107,3 +109,40 @@ td.lastordercell { font-size:13px; color:grey; }
     vertical-align: middle;
     padding-left:50px;
 }
+
+.select .table { display:table; height:100% }
+.select .table .cell { display:table-cell; vertical-align: middle }
+.select .table .cell span { margin-left:10px; margin-right:10px; }
+.select .table .cell span.active { color:#78abe7 }
+
+.select span {
+    padding-top:10px;
+}
+
+.logo { text-align:center; padding-bottom:30px; }
+
+
+.all_clients {
+
+}
+
+.new_clients {
+    border-bottom:2px solid #009f9c;
+}
+
+.regular_clients {
+    border-bottom:2px solid #9b9b9b;
+}
+
+.vip_clients {
+    border-bottom:2px solid #6200ea;
+}
+
+.filter { height:57px; border-bottom:1px solid #e0e0e0; }
+.filter .table { display:table; height:100%; width:100%; font-size:13px; }
+.filter .table .cell { display:table-cell; vertical-align: middle }
+.filter .table .cell:first-child { width:300px; }
+.filter .table .cell.row-second { text-align:right; }
+
+.filter .clients_name { border:0px; }
+.filter .sort_last_order { margin-right:20px; }

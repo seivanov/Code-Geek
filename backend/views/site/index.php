@@ -18,19 +18,32 @@ $this->registerJsFile(
 <div class="site-index">
 
     <div class="table-responsive">
+        <div class="logo">
+            <img src="/admin/img/logo.png">
+        </div>
         <div class="select">
-            <span class="all_clients clients" status="">Все клиенты</span>
-            <span class="new_clients clients" status="0">Новые</span>
-            <span class="regular_clients clients" status="2">Постоянные</span>
-            <span class="vip_clients clients" status="1">Вип клиенты</span>
+            <div class="table">
+                <div class="cell">
+                    <span class="all_clients clients active" status="">Все клиенты</span>
+                    <span class="new_clients clients" status="0">Новые</span>
+                    <span class="regular_clients clients" status="2">Постоянные</span>
+                    <span class="vip_clients clients" status="1">Вип клиенты</span>
+                </div>
+            </div>
         </div>
         <div class="filter">
-            <input type="button" value="S" class="search">
-            <input type="text" placeholder="Поиск по клиентам" class="clients_name">
-            Сортировать по:
-            <span class="sort_last_order">Последний заказ</span>
-            Заказов от: <input type="text" class="last_order_from">
-            Заказов до: <input type="text" class="last_order_to">
+            <div class="table">
+                <div class="cell">
+                    <input type="button" value="S" class="search">
+                    <input type="text" placeholder="Поиск по клиентам" class="clients_name">
+                </div>
+                <div class="cell row-second">
+                    Сортировать по:
+                    <span class="sort_last_order">Последний заказ</span>
+                    Заказов от: <input type="text" class="last_order_from">
+                    Заказов до: <input type="text" class="last_order_to">
+                </div>
+            </div>
         </div>
         <?php Pjax::begin(['enablePushState' => false, 'enableReplaceState' => false, 'timeout'=>6000, 'id' => 'gridpjax']); ?>
         <?= GridView::widget([
