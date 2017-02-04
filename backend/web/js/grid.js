@@ -20,7 +20,13 @@ $().ready(function(){
     });
 
     $('.sort_last_order').click(function(){
-        pjax_clients_filter({ 'sort': 'last_order' });
+        if($(this).attr('sort') == 1) {
+            $(this).attr('sort', 0);
+            pjax_clients_filter({'ClientsSearch[sortlastorder]': '0'});
+        } else {
+            $(this).attr('sort', 1);
+            pjax_clients_filter({'ClientsSearch[sortlastorder]': '1'});
+        }
     });
 
     $('.search').click(function(){

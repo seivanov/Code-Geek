@@ -21,6 +21,8 @@ class Clients extends \yii\db\ActiveRecord
     public $count = 0;
     public $sum;
 
+    public $sortlastorder = 0;
+
     private $status = [
         0 => 'Новый клиент',
         1 => 'Вип клиент',
@@ -51,7 +53,7 @@ class Clients extends \yii\db\ActiveRecord
     {
         return [
             [['fio', 'register_at'], 'required'],
-            [['status', 'register_at', 'fromcount', 'tocount', 'count'], 'integer'],
+            [['status', 'register_at', 'fromcount', 'tocount', 'count', 'sortlastorder'], 'integer'],
             [['fio'], 'string', 'max' => 255],
         ];
     }

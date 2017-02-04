@@ -18,6 +18,7 @@ class ClientsSearch extends Clients
     public $orderCount;
     public $fromcount;
     public $tocount;
+    public $sortlastorder = 0;
 
 
     /**
@@ -31,7 +32,8 @@ class ClientsSearch extends Clients
             [['orderAmount'], 'safe'],
             [['orderCount'], 'safe'],
             [['fromcount'], 'safe'],
-            [['tocount'], 'safe']
+            [['tocount'], 'safe'],
+            [['sortlastorder'], 'safe']
         ];
     }
 
@@ -93,7 +95,7 @@ class ClientsSearch extends Clients
 
         $query->andFilterWhere(['like', 'fio', $this->fio]);
 
-        $query->orderBy(['order_id' => SORT_ASC]);
+        $query->orderBy(['order_id' => ($this->sortlastorder == 0) ? SORT_DESC : SORT_ASC]);
 
         return $dataProvider;
     }
