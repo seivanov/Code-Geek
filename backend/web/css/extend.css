@@ -1,0 +1,109 @@
+
+/*
+.grid-view tr[clienttype='0'] td:first-child { color:#009f9c }
+.grid-view tr[clienttype='1'] td:first-child { color:#6200ea }
+.grid-view tr[clienttype='2'] td:first-child { color:#9b9b9b }
+*/
+
+.grid-view .fio { margin-left:20px;  }
+.grid-view tr[clienttype='0'] .fio::before {
+    content: '';
+    display: block;
+    margin-right: 10px;
+    margin-top: 4px;
+    float:left;
+    width:70px;
+    height:76px;
+    background: url('../img/client_0.png');
+}
+
+.grid-view tr[clienttype='1'] .fio::before {
+    content: '';
+    display: block;
+    margin-right: 10px;
+    margin-top: 4px;
+    float:left;
+    width:70px;
+    height:76px;
+    background: url('../img/client_1.png');
+}
+
+.grid-view tr[clienttype='2'] .fio::before {
+    content: '';
+    display: block;
+    margin-right: 10px;
+    margin-top: 4px;
+    float:left;
+    width:70px;
+    height:76px;
+    background: url('../img/client_2.png');
+}
+
+.grid-view tr[clienttype='0'] .status::before {
+    content: '';
+    display: block;
+    margin-right: 10px;
+    margin-top: 4px;
+    float:left;
+    width: 10px;
+    height: 10px;
+    background: #009f9c;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.grid-view tr[clienttype='1'] .status::before {
+    content: '';
+    display: block;
+    margin-right: 10px;
+    margin-top: 4px;
+    float:left;
+    width: 10px;
+    height: 10px;
+    background: #6200ea;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.grid-view tr[clienttype='2'] .status::before {
+    content: '';
+    display: block;
+    margin-right: 10px;
+    margin-top: 4px;
+    float:left;
+    width: 10px;
+    height: 10px;
+    background: #9b9b9b;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.currency:after { content:"р." }
+
+td.lastordercell { font-size:13px; color:grey; }
+
+.number { color: #78abe7 }
+
+.grid-view tbody tr { height:100px; }
+.grid-view tbody tr td { vertical-align: middle }
+
+.orderscount {
+
+    width:80px;
+    text-align:center;
+    color:white;
+    background:#4a90e2;
+    border:1px solid #4a90e2;
+    border-radius: 3px 3px 3px 3px;
+
+}
+
+.select {
+    background: #eeeeee;
+    height:50px;
+    vertical-align: middle;
+    padding-left:50px;
+}

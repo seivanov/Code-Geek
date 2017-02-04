@@ -12,14 +12,26 @@ use common\models\Clients;
  */
 class ClientsSearch extends Clients
 {
+
+    public $count = 0;
+    public $orderAmount;
+    public $orderCount;
+    public $fromcount;
+    public $tocount;
+
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'status', 'register_at'], 'integer'],
+            [['id', 'status', 'register_at', 'count'], 'integer'],
             [['fio'], 'safe'],
+            [['orderAmount'], 'safe'],
+            [['orderCount'], 'safe'],
+            [['fromcount'], 'safe'],
+            [['tocount'], 'safe']
         ];
     }
 
@@ -41,12 +53,24 @@ class ClientsSearch extends Clients
      */
     public function search($params)
     {
+
         $query = Clients::find();
+
+        $subQuery = Orders::find()
+            ->select('client_id, SUM(summ) as order_amount, COUNT(id) as order_count')
+            ->groupBy('client_id');
+        $query->leftJoin(['orderSum' => $subQuery], 'orderSum.client_id = id');
+
+        $subQuery = Orders::find()
+            ->select('client_id, id as order_id')
+            ->where('id IN (SELECT MAX(id) FROM orders GROUP BY client_id)');
+        $query->leftJoin(['lastorder' => $subQuery], 'lastorder.client_id = id');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => false
         ]);
 
         $this->load($params);
@@ -64,7 +88,12 @@ class ClientsSearch extends Clients
             'register_at' => $this->register_at,
         ]);
 
+        $query->andFilterWhere(['>=', 'order_count', $this->fromcount]);
+        $query->andFilterWhere(['<=', 'order_count', $this->tocount]);
+
         $query->andFilterWhere(['like', 'fio', $this->fio]);
+
+        $query->orderBy(['order_id' => SORT_ASC]);
 
         return $dataProvider;
     }

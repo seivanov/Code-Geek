@@ -15,6 +15,12 @@ use Yii;
 class Clients extends \yii\db\ActiveRecord
 {
 
+    public $fromcount;
+    public $tocount;
+
+    public $count = 0;
+    public $sum;
+
     private $status = [
         0 => 'Новый клиент',
         1 => 'Вип клиент',
@@ -24,7 +30,7 @@ class Clients extends \yii\db\ActiveRecord
     public function getStatus($status) {
 
         if(isset($this->status[$status]))
-            return $this->status[$status];
+            return \yii\helpers\html::tag('div', $this->status[$status], ['class' => 'status']);
 
         return '';
 
@@ -45,7 +51,7 @@ class Clients extends \yii\db\ActiveRecord
     {
         return [
             [['fio', 'register_at'], 'required'],
-            [['status', 'register_at'], 'integer'],
+            [['status', 'register_at', 'fromcount', 'tocount', 'count'], 'integer'],
             [['fio'], 'string', 'max' => 255],
         ];
     }
@@ -63,7 +69,24 @@ class Clients extends \yii\db\ActiveRecord
             'orders_count' => 'Всего заказов',
             'orders_summ' => 'Сумма заказов',
             'register_at' => 'Зарегистрирован',
+            'orderAmount' => 'Сумма заказов'
         ];
+    }
+
+    public function getOrderAmount()
+    {
+        return $this->hasMany(Orders::className(), ['client_id' => 'id'])->sum('summ');
+    }
+
+    public function getOrderCount()
+    {
+        return $this->hasMany(Orders::className(), ['client_id' => 'id'])->count();
+    }
+
+    // -----------------------
+
+    public function getOrders() {
+        return $this->hasOne(Orders::className(), ['client_id' => 'id']);
     }
 
     public function getLastOrder() {

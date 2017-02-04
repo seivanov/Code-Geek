@@ -31,7 +31,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'index' => ['post', 'get'],
                 ],
             ],
         ];
@@ -58,7 +58,10 @@ class SiteController extends Controller
     {
 
         $searchModel  = new ClientsSearch();
-        $dataProvider = $searchModel->search($_GET);
+        if(\Yii::$app->request->isPost)
+            $dataProvider = $searchModel->search($_POST);
+        else
+            $dataProvider = $searchModel->search($_GET);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
